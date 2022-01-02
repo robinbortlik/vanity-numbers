@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require 'benchmark'
+
+Dir["#{__dir__}/**/lib/**.rb"].each { |file| require file }
+
+puts "Generating data for examples 3, 5, 6"
+Solution3::DataGenerator.generate
+Solution5::DataGenerator.generate
+Solution6::DataGenerator.generate
+puts "Finished"
+
+numbers = File.read("#{__dir__}/data/benchmark_numbers.txt").split("\n")
+number_of_samples = ARGV[0] ? ARGV[0].to_i : 10
+sample = numbers.sample(number_of_samples)
+
+puts "Running benchmark for #{number_of_samples} samples"
+
+Benchmark.bm do |x|
+  x.report("Solution1") { sample.each {|n| Solution1::VanityNumber.new(n).find_words } }
+  x.report("Solution2") { sample.each {|n| Solution2::VanityNumber.new(n).find_words } }
+  x.report("Solution3") { sample.each {|n| Solution3::VanityNumber.new(n).find_words } }
+  x.report("Solution4") { sample.each {|n| Solution4::VanityNumber.new(n).find_words } }
+  x.report("Solution5") { sample.each {|n| Solution5::VanityNumber.new(n).find_words } }
+  x.report("Solution6") { sample.each {|n| Solution6::VanityNumber.new(n).find_words } }
+end

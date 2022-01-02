@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require_relative "#{__dir__}/../lib/data_generator"
+Solution3::DataGenerator.generate
