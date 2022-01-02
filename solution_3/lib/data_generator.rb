@@ -7,11 +7,11 @@ module Solution3
 
       def generate
         clean
-        raw_data.each do |line|
-          line.strip!
-          number = PhoneButtons.text_to_num(line)
+        raw_data.each do |word|
+          word.strip!
+          number = PhoneButtons.text_to_num(word)
           dir = build_dir(number[0])
-          append(dir, line)
+          append(dir, word)
         end
       end
 

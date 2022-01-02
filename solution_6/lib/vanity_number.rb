@@ -22,8 +22,16 @@ module Solution6
     private
 
     def match?(line)
-      (PhoneButtons.char_to_num(line[0]).to_s == @number[0]) &&
-      (@number == PhoneButtons.text_to_num(line.slice(/[a-zA-Z]*/)))
+      first_character_match?(line) && first_word_match?(line)
+    end
+
+    def first_character_match?(line)
+      PhoneButtons.char_to_num(line[0]).to_s == @number[0]
+    end
+
+    def first_word_match?(line)
+      first_word = line.slice(/[a-zA-Z]*/)
+      @number == PhoneButtons.text_to_num(first_word)
     end
 
     def raw_data

@@ -9,18 +9,25 @@ module Solution4
 
     def find_words
       words = []
-      raw_data.each do |line|
-        line.strip!
-        words.push(line) if match?(line)
+      raw_data.each do |word|
+        word.strip!
+        words.push(word) if match?(word)
       end
       words
     end
 
     private
 
-    def match?(line)
-      (PhoneButtons.char_to_num(line[0]).to_s == @number[0]) &&
-      (@number == PhoneButtons.text_to_num(line))
+    def match?(word)
+      first_character_match?(word) && word_match?(word)
+    end
+
+    def first_character_match?(word)
+      PhoneButtons.char_to_num(word[0]).to_s == @number[0]
+    end
+
+    def word_match?(word)
+      @number == PhoneButtons.text_to_num(word)
     end
 
     def raw_data

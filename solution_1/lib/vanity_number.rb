@@ -9,14 +9,18 @@ module Solution1
 
     def find_words
       words = []
-      raw_data.each do |line|
-        line.strip!
-        words.push(line) if @number == PhoneButtons.text_to_num(line)
+      raw_data.each do |word|
+        word.strip!
+        words.push(word) if match?(word)
       end
       words
     end
 
     private
+
+    def match?(word)
+      @number == PhoneButtons.text_to_num(word)
+    end
 
     def raw_data
       @raw_data ||= File.open("#{__dir__}/../../data/dictionary.txt")

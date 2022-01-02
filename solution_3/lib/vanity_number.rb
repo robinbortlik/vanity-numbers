@@ -9,15 +9,21 @@ module Solution3
 
     def find_words
       words = []
-      raw_data(@number[0]).each do |line|
-        words.push(line.strip) if @number == PhoneButtons.text_to_num(line)
+      raw_data.each do |word|
+        word.strip!
+        words.push(word) if match?(word)
       end
       words
     end
 
     private
 
-    def raw_data(dir_name)
+    def match?(word)
+      @number == PhoneButtons.text_to_num(word)
+    end
+
+    def raw_data
+      dir_name = @number[0]
       @raw_data ||= File.open("#{__dir__}/../generated_data/#{dir_name}/dictionary.txt")
     end
   end
