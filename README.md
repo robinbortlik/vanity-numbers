@@ -23,7 +23,7 @@ bundle install # install gems
 
 #### Solution 1
 
-Iterates over every word in dictionary and calculates its `Number` representation. If calculated number and number we are looking for are equal, it push the word to `result` array.
+Iterates over every word in dictionary and calculates its `Number` representation. If calculated number and number we are looking for are equal, it push the word to `words` array.
 
 
 #### Solution 2
